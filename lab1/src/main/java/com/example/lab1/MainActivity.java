@@ -2,9 +2,11 @@ package com.example.lab1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements DataInput.OnFragmentSendDataListener {
+public class MainActivity extends AppCompatActivity implements DataInputFragment.OnFragmentSendDataListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,9 +16,14 @@ public class MainActivity extends AppCompatActivity implements DataInput.OnFragm
 
     @Override
     public void onSendData(String mobileType, String company) {
-        Result fragment = (Result) getSupportFragmentManager()
+        ResultFragment fragment = (ResultFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.resultFragmentContainerView);
         if (fragment != null)
             fragment.setData(mobileType, company);
+    }
+
+    public void showAllSelections(View view) {
+        Intent intent = new Intent(this, DBViewActivity.class);
+        startActivity(intent);
     }
 }

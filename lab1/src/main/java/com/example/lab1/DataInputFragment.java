@@ -15,8 +15,11 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
-public class DataInput extends Fragment {
+
+public class DataInputFragment extends Fragment {
 
     interface OnFragmentSendDataListener {
         void onSendData(String mobileType, String company);
@@ -62,6 +65,7 @@ public class DataInput extends Fragment {
             public void onClick(View v) {
                 if (spinner.getSelectedItem() != null && radioGroup.getCheckedRadioButtonId() != -1) {
                     RadioButton radioButton = view.findViewById(radioGroup.getCheckedRadioButtonId());
+                    saveData(spinner.getSelectedItem().toString(), (String) radioButton.getText());
                     fragmentSendDataListener.onSendData(spinner.getSelectedItem().toString(), (String) radioButton.getText());
                 } else {
                     Toast toast = Toast.makeText(getContext(),
@@ -71,5 +75,17 @@ public class DataInput extends Fragment {
             }
         });
         return view;
+    }
+
+    public void saveData(String mobileType, String company) {
+        OutputStreamWriter outputStreamWriter = null;
+        try {
+            outputStreamWriter = new OutputStreamWriter(getContext().openFileOutput("data.txt",
+                    Context.MODE_APPEND | Context.MODE_PRIVATE));
+            outputStreamWriter.write(mobileType + ", " + company + "\n");
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

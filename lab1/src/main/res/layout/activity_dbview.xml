@@ -5,27 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".DBViewActivity">
 
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/dataInputFragmentContainerView"
-        android:name="com.example.lab1.DataInputFragment"
+    <GridView
+        android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="545dp"
+        android:scrollbars="horizontal" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/resultFragmentContainerView"
-        android:name="com.example.lab1.ResultFragment"
+    <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:onClick="showAllSelections"
-        android:text="Show all selections" />
+        android:onClick="returnToMainActivity"
+        android:text="Return" />
 
 </LinearLayout>
